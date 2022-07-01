@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-container:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,13 +18,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Docker metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: graeson/hello
+          tags: |
+            type=sha
+            type=raw,value=latest
 
-      - name: Build and push
+      - name: Docker build & push
         uses: docker/build-push-action@v3
         with:
           context: .
