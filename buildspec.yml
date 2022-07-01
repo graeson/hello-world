@@ -1,0 +1,18 @@
+version: 0.2
+
+artifacts:
+  files: images.json
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+
+  build:
+    commands:
+      - docker build -t $IMAGE:$VERSION .
+      - docker tag $IMAGE:$VERSION $REGISTRY:$VERSION
+
+  post_build:
+    commands:
+      - docker push $REGISTRY:$VERSION
