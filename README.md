@@ -6,8 +6,9 @@ A simple Hello, World! to containerize and deploy as a stand-in for a real servi
 
 * Web server (nginx) reponds to GET / by returning index.html
 * Build with docker using `Dockerfile`
-* Build with aws using `buildspec.yml`
-* Build from console with `commands.sh`
+* Build and publish from console with `commands.sh`
+* Build and publish with AWS CodeBuild using `buildspec.yml`
+* Build and publish with GitHub Actions using `.github/workflows/ci.yaml`
 
 ## Change Log
 * Updated this README ;)
